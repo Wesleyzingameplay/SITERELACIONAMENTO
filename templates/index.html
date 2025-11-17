@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Feliz Aniversario de Namoro! 💖</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+    <!-- 💖 Container principal -->
+    <div class="container">
+        <h1>Feliz Aniversario de Namoro! 💖</h1>
+        <img src="/static/foto.jpg" alt="Foto do casal">
+        <p>Você é a melhor pessoa que eu poderia ter ao meu lado. Nosso 3º ano de muitos. Eu te amo muito, meu amor ❤️</p>
+
+        <div id="tempoJuntos">
+            Estamos juntos há...
+        </div>
+    </div>
+
+    <!-- 💓 JS para corações flutuando e contador -->
+    <script>
+        // Função para criar corações flutuantes
+        function criarCoracao() {
+            const coracao = document.createElement("div");
+            coracao.className = "heart";
+            coracao.textContent = "💖";
+            coracao.style.left = Math.random() * 100 + "vw";
+            coracao.style.animationDuration = (4 + Math.random() * 3) + "s";
+            document.body.appendChild(coracao);
+
+            setTimeout(() => {
+                coracao.remove();
+            }, 7000);
+        }
+
+        setInterval(criarCoracao, 400); // Novo coração a cada 400ms
+
+        // Contador de tempo juntos
+        const dataInicio = new Date(2022, 10, 28); // 28 de novembro de 2022
+
+        function atualizarTempo() {
+            const agora = new Date();
+            let anos = agora.getFullYear() - dataInicio.getFullYear();
+            let meses = agora.getMonth() - dataInicio.getMonth();
+            let dias = agora.getDate() - dataInicio.getDate();
+
+            if (dias < 0) {
+            meses--;
+            let mesAnterior = new Date(agora.getFullYear(), agora.getMonth(), 0).getDate();
+            dias += mesAnterior;
+            }
+
+            if (meses < 0) {
+            anos--;
+         meses += 12;
+            }
+
+    // Agora calcula horas/minutos/segundos certinho
+    let diff = agora - dataInicio;
+    const segundos = Math.floor(diff / 1000) % 60;
+    const minutos = Math.floor(diff / (1000 * 60)) % 60;
+    const horas = Math.floor(diff / (1000 * 60 * 60)) % 24;
+
+    const texto = `Estamos juntos há ${anos} anos, ${meses} meses, ${dias} dias, ${horas} horas, ${minutos} minutos e ${segundos} segundos. 💖`;
+    document.getElementById("tempoJuntos").innerText = texto;
+}
+
+        setInterval(atualizarTempo, 1000);
+        atualizarTempo();
+    </script>
+</body>
+</html>
